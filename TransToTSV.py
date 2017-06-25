@@ -1,7 +1,4 @@
-
-# coding: utf-8
-
-# In[2]:
+import sys
 
 def lion_in_desert(pos, CNA_data):
     cur_pos=len(CNA_data)/2
@@ -24,10 +21,29 @@ def lion_in_desert(pos, CNA_data):
         else:
             return CNA_data[cur_pos]
 
+arg=sys.argv
+if len(arg)<3:
+	wey_input_SNV=raw_input('input file SCV ')
+	wey_input_CNA=raw_input('input file CNA (Segmentation) ')
+else:
+	wey_input_SNV=arg[1]
+	wey_input_CNA=arg[2]
+if '-h' in arg:
+	print("help: ")
+	break
 
-wey_input_SNV=raw_input('input file SCV ')
-wey_input_CNA=raw_input('input file CNA (Segmentation) ')
-
+if '-d' in arg:
+	s_name=0
+	s_ch=1
+	s_pos=2
+	s_RD=35
+	c_name=0
+	c_ch=2
+	c_start=3
+	c_end=4
+	c_min=6
+	c_maj=5
+	c_ply=10
 
 #Take the SNV data
 SNV_data=[]
@@ -100,9 +116,3 @@ for i in SNV_data:
         
 file_write.close()
 print('----- Completed -----')
-
-
-# In[ ]:
-
-
-
