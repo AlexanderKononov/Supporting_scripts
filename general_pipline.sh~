@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -Xmx3G -jar /home/alexkono/Soft/GenomeAnalysisTK.jar \
+--help
