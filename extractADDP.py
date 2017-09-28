@@ -5,7 +5,7 @@ data=[]
 #lable=True
 f_cvf=open(arg[1], 'r')
 f_baf=open(arg[1]+'baf.txt', 'w')
-f_logR=open(arg[1]+'logR.txt', 'w')
+f_logR=open(arg[1]+'cna.txt', 'w')
 for line in f_cvf:
 	if line[0]=='#':
 		continue
