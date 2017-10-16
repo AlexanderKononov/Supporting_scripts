@@ -1,0 +1,2 @@
+/home/alexkono/git/hello-world/CNAviewer.ipynb
+/home/alexkono/git/hello-world/Emulatior.ipynb

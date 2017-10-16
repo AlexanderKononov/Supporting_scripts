@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sd='/home/alexkono/git/hello-world'
+echo $sd
+for it in /home/alexkono/git/hello-world/*ipynb
+do
+echo $it
+done
+#for file in $filelist
+#do 
+#echo "asdfer"
+#echo $file
+#done
