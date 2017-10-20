@@ -6,7 +6,7 @@ arg=sys.argv
 data=[]
 #lable=True
 f_cvf=open(arg[1], 'r')
-f_baf=open(arg[1]+'BAF_f0.1.txt', 'w')
+f_baf=open(arg[1]+'BAFs1000_f0.01l3.txt', 'w')
 step=1000
 delcoin=0
 line=f_cvf.readline()
@@ -21,6 +21,9 @@ while line!= '':
 			break
 		colm=line.strip().split('\t')
 		colm[0]=colm[0].replace('chr','').replace('X', '23').replace('Y', '24').replace('M', '25')
+		if colm[0]=='24':
+			line=f_cvf.readline()
+			continue
 		rg=colm[-1].strip().split(':')
 		if len(rg)<=3:
 			line=f_cvf.readline()
@@ -33,7 +36,7 @@ while line!= '':
 		
 		#mdl=math.fabs((float(rb[1])/float(rg[2]))-0.5)
 		baf=float(rb[1])/float(rg[2])
-		lvl=baf//0.1
+		lvl=baf//0.01
 
 		lable_data=np.insert(lable_data,-1,(len(data)-1,float(baf), lvl), axis=0)
 		line=f_cvf.readline()
@@ -45,7 +48,7 @@ while line!= '':
 	del_list_lvl=[]
 	for i in lable_data:
 		if i[2]!=curr_lvl:
-			if memb_lvl<=10:
+			if memb_lvl<=3:
 				del_list_lvl.append(curr_lvl)
 			curr_lvl=i[2]
 			memb_lvl=0
