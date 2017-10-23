@@ -64,7 +64,8 @@ while line!= '':
 			continue
 		i+=1
 	'''	
-		
+	if len(lable_data)<2:
+		break	
 	for i in lable_data:
 			if i[2] in del_list_lvl:
 				continue
