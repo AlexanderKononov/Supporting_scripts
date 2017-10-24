@@ -32,7 +32,7 @@ file_cna =open(weyCNA, 'r')
 coint=0.0
 size=sum(1 for l in open(weyCNA, 'r'))
 for line in file_cna:
-    coint+=1
+    coint+=10
     if part[0]<((coint/size)*100)<part[1]:
         sep_line=line.split()
         dataCNA.append(sep_line)
@@ -44,7 +44,7 @@ file_Baf =open(weyBaf, 'r')
 coint=0.0
 size=sum(1 for l in open(weyBaf, 'r'))
 for line in file_Baf:
-    coint+=100
+    coint+=1
     if part[0]<((coint/size)*100)<part[1]:
         sep_line=line.split()
         dataBaf.append(sep_line)
@@ -64,7 +64,7 @@ dataBafc=[]
 i=0
 while i<len(dataBaf):
     dataBafc.append(dataBaf[i])
-    i+=1
+    i+=100
 '''
 i=0
 curr_chr=dataCNAc[i][0]
