@@ -64,7 +64,7 @@ dataBafc=[]
 i=0
 while i<len(dataBaf):
     dataBafc.append(dataBaf[i])
-    i+=100
+    i+=1
 '''
 i=0
 curr_chr=dataCNAc[i][0]
@@ -117,7 +117,7 @@ print('----DP has been completed----')
 
 #Drawing BAF
 #ax=fig.add_axes([0.08,0.05,0.9,0.4])
-plt.subplot(212)
+#plt.subplot(212)
 x_coin=0
 x2=[]
 y2=[]

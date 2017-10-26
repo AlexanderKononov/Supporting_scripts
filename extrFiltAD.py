@@ -6,7 +6,7 @@ arg=sys.argv
 data=[]
 #lable=True
 f_cvf=open(arg[1], 'r')
-f_baf=open(arg[1]+'BAFs1000_f0.01l3.txt', 'w')
+f_baf=open(arg[1]+'_df_BAFs1000_f0.01l30.txt', 'w')
 step=1000
 delcoin=0
 line=f_cvf.readline()
@@ -24,6 +24,9 @@ while line!= '':
 		if colm[0]=='24':
 			line=f_cvf.readline()
 			continue
+		if colm[6]=='filter4':
+			line=f_cvf.readline()
+			continue
 		rg=colm[-1].strip().split(':')
 		if len(rg)<=3:
 			line=f_cvf.readline()
@@ -32,10 +35,24 @@ while line!= '':
 		if rg[2]=='0':
 			line=f_cvf.readline()
 			continue
+		if rb[1]=='0' or rb[1]==rg[2]:
+			line=f_cvf.readline()
+			continue
+		baf=float(rb[1])/float(rg[2])
+		if baf<0.1 or baf>0.9:
+			line=f_cvf.readline()
+                        continue
+		if int(rb[1])<3:
+                        line=f_cvf.readline()
+                        continue
+		#if int(rg[2])<10:
+                #        line=f_cvf.readline()
+                #        continue
+
 		data.append(str(colm[0])+'\t'+str(colm[1])+'\t'+str(int(rb[1]))+'\t'+str(rg[2])+'\n')
 		
 		#mdl=math.fabs((float(rb[1])/float(rg[2]))-0.5)
-		baf=float(rb[1])/float(rg[2])
+		#baf=float(rb[1])/float(rg[2])
 		lvl=baf//0.01
 
 		lable_data=np.insert(lable_data,-1,(len(data)-1,float(baf), lvl), axis=0)
@@ -48,7 +65,7 @@ while line!= '':
 	del_list_lvl=[]
 	for i in lable_data:
 		if i[2]!=curr_lvl:
-			if memb_lvl<=3:
+			if memb_lvl<=30:
 				del_list_lvl.append(curr_lvl)
 			curr_lvl=i[2]
 			memb_lvl=0
