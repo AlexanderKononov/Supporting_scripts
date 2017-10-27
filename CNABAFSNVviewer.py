@@ -88,13 +88,14 @@ while i<len(dataSNV):
     i+=1
 
 #renombering, recalling position
-'''
+
 i=0
 curr_chr=dataCNAc[i][0]
 addnum=0
+
 while i<len(dataCNAc):
     if curr_chr!= dataCNAc[i][0]:
-        addnum=addnum+dataCNAc[i-1][1]
+        addnum=dataCNAc[i-1][1]
         curr_chr=dataCNAc[i][0]
     dataCNAc[i][1]=int(addnum)+int(dataCNAc[i][1])
     i+=1
@@ -104,7 +105,7 @@ curr_chr=dataBafc[i][0]
 addnum=0
 while i<len(dataBafc):
     if curr_chr!= dataBafc[i][0]:
-        addnum=addnum+dataBafc[i-1][1]
+        addnum=dataBafc[i-1][1]
         curr_chr=dataBafc[i][0]
     dataBafc[i][1]=int(addnum)+int(dataBafc[i][1])
     i+=1
@@ -114,11 +115,11 @@ curr_chr=dataSNVc[i][0]
 addnum=0
 while i<len(dataSNVc):
     if curr_chr!= dataSNVc[i][0]:
-        addnum=addnum+dataSNVc[i-1][1]
+        addnum=dataSNVc[i-1][1]
         curr_chr=dataSNVc[i][0]
     dataSNVc[i][1]=int(addnum)+int(dataSNVc[i][1])
     i+=1
-'''
+
     
 #data.pop(0)   #delite first string
     
@@ -136,8 +137,8 @@ for i in dataCNAc:
     #y1=np.array([float(i[13]),float(i[13])])
     x1.append(int(i[1]))
     y=int(i[2])
-    if y>200:
-        y=200
+    if y>100:
+        y=100
     y1.append(y)
 plt.plot(x1,y1,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')
@@ -148,7 +149,7 @@ print('----DP has been completed----')
 #Drawing BAF
 #ax=fig.add_axes([0.08,0.05,0.9,0.4])
 plt.subplot(312)
-x_coin=0
+#x_coin=0
 x2=[]
 y2=[]
 for i in dataBafc:
@@ -157,13 +158,13 @@ for i in dataBafc:
     ref=DP-float(i[2])
     if alt==0 or DP==0:
         continue
-    #x2.append(int(i[1]))
-    x2.append(x_coin)
+    x2.append(int(i[1]))
+    #x2.append(x_coin)
     y2.append(alt/DP)
-    #x2.append(int(i[1]))
-    x2.append(x_coin)
+    x2.append(int(i[1]))
+    #x2.append(x_coin)
     y2.append(ref/DP)
-    x_coin+=1
+    #x_coin+=1
 plt.plot(x2,y2,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')
 plt.ylabel('Baf')
@@ -172,7 +173,7 @@ print('----Baf has been completed----')
 #Drawing SNV
 #ax=fig.add_axes([0.08,0.05,0.9,0.4])
 plt.subplot(313)
-x_coin=0
+#x_coin=0
 x3=[]
 y3=[]
 for i in dataSNVc:
@@ -181,10 +182,10 @@ for i in dataSNVc:
     ref=DP-float(i[2])
     if alt==0 or DP==0:
         continue
-    #x3.append(int(i[1]))
-    x3.append(x_coin)
+    x3.append(int(i[1]))
+    #x3.append(x_coin)
     y3.append(alt/DP)
-    x_coin+=1
+    #x_coin+=1
 plt.plot(x3,y3,'ko', markersize=1)
 #plt.plot(x3, y3, linewidth=6, color='black')
 plt.ylabel('SNV')
