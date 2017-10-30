@@ -8,10 +8,14 @@ file_list=[]
 line_list=[]
 for i in range(nfile):
 	file_list.append(open(arg[i+1],'r'))
-fw=open('out.txt','w')
+fw=open('Joint.txt','w')
 for f in file_list:
 	line_list.append(f.readline().strip().split('\t'))
+
 flg=0
+
+chr_curr=''
+
 while 0==0:
 	current=[]
 	brk=False
@@ -62,13 +66,30 @@ while 0==0:
 	coint+=1
 	finde_pos=True
 	for i in range(nfile):
+		if line_list[i][0]=='':
+			break
+		
 		if line_list[i][0]!=current[0] or line_list[i][1]!=current[1]:
+			
+			if line_list[0][0]!=chr_curr:
+				chr_curr=line_list[0][0]
+				fw.write(line_list[0][0]+'\t'+line_list[0][1])
+
+				for i in range(nfile):
+					if flg==1:
+						print(line_list[i])
+					fw.write('\t'+line_list[i][2]+'\t'+line_list[i][3])
+					line_list[i]=file_list[i].readline().strip().split('\t')
+					if len(line_list[i])<2:
+						brk=True
+				fw.write('\n')
+
 			finde_pos=False
 	if flg==1:
 			print(finde_pos)
 	if finde_pos:
 		fw.write(line_list[0][0]+'\t'+line_list[0][1])
-		chrom1.add(line_list[0][0])
+		#chrom1.add(line_list[0][0])
 		for i in range(nfile):
 			if flg==1:
 				print(line_list[i])

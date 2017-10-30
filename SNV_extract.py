@@ -36,15 +36,15 @@ for line in f_w:
     lp=line.strip().split('\t')
     i=fst
     j=0
-    while i<=len(lp):
+    while i<len(lp):
         if lp[i+1]=='NA':
             i+=2
             j+=1
             continue
-        print(name_list[j])
-        print(lp[i+1])
-        AD=lp[i].strip('"').split(',')
-        file_list[j].write(lp[0].strip('"')+'\t'+lp[1].strip('"')+'\t'+AD[1]+'\t'+lp[i+1]+'\n')
+        chrom=lp[0].strip('"').strip('chr').replace('X','23').replace('Y','24').replace('M','25')
+	if chrom!='24' and chrom!='25':
+		AD=lp[i].strip('"').split(',')
+        	file_list[j].write(chrom+'\t'+lp[1].strip('"')+'\t'+AD[1]+'\t'+lp[i+1]+'\n')
         j+=1
         i+=2
 
