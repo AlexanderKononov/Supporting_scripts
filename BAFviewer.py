@@ -64,7 +64,7 @@ dataBafc=[]
 i=0
 while i<len(dataBaf):
     dataBafc.append(dataBaf[i])
-    i+=1
+    i+=10
 '''
 i=0
 curr_chr=dataCNAc[i][0]
@@ -131,8 +131,8 @@ for i in dataBafc:
     x2.append(x_coin)
     y2.append(alt/DP)
     #x2.append(int(i[1]))
-    x2.append(x_coin)
-    y2.append(ref/DP)
+    #x2.append(x_coin)
+    #y2.append(ref/DP)
     x_coin+=1
 plt.plot(x2,y2,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')

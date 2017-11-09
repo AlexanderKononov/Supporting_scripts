@@ -34,7 +34,7 @@ file_cna =open(weyCNA, 'r')
 coint=0.0
 size=sum(1 for l in open(weyCNA, 'r'))
 for line in file_cna:
-    coint+=10
+    coint+=1
     if part[0]<((coint/size)*100)<part[1]:
         sep_line=line.split()
         dataCNA.append(sep_line)
@@ -161,9 +161,9 @@ for i in dataBafc:
     x2.append(int(i[1]))
     #x2.append(x_coin)
     y2.append(alt/DP)
-    x2.append(int(i[1]))
+    #x2.append(int(i[1]))
     #x2.append(x_coin)
-    y2.append(ref/DP)
+    #y2.append(ref/DP)
     #x_coin+=1
 plt.plot(x2,y2,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')
