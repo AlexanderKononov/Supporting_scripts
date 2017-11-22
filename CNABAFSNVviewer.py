@@ -4,18 +4,10 @@ import matplotlib.pyplot as plt
 
 arg=sys.argv
 weyCNA=arg[1]
-#weyCNA=raw_input('CNA file')
-#weyCNA='/home/kononov/Desktop/test14/data/tu_cna.txt'
-#weyCNA='testCNA.txt'
-
-#weyBaf=raw_input('Baf file')
 weyBaf=arg[2]
-#weyBaf='/home/kononov/Desktop/baf_viewer/H002_B1144_BAF2.txt'
-#weyBaf='testBaf.txt'
-
 weySNV=arg[3]
-#We introduce either the range through "-" or simply a number
-#what_part=raw_input('What part of data you want to view? (in %)')
+
+#Choose a pert of data
 what_part='100'
 print('-----Start-----')
 part=[]
@@ -26,8 +18,9 @@ if len(p)==2:
 else:
     part.append(0)
     part.append(int(p[0].strip()))
-print(part[0], part[1])    
-#Choose a part of the data
+print(part[0], part[1]) 
+   
+#Taking target part of the data
 
 dataCNA=[]
 file_cna =open(weyCNA, 'r')
@@ -79,7 +72,7 @@ dataBafc=[]
 i=0
 while i<len(dataBaf):
     dataBafc.append(dataBaf[i])
-    i+=1
+    i+=10
 
 dataSNVc=[]
 i=0
@@ -87,36 +80,41 @@ while i<len(dataSNV):
     dataSNVc.append(dataSNV[i])
     i+=1
 
-#renombering, recalling position
+#renumbering, recalling position
 
 i=0
 curr_chr=dataCNAc[i][0]
 addnum=0
-
+chr_CNA=[]
 while i<len(dataCNAc):
     if curr_chr!= dataCNAc[i][0]:
         addnum=dataCNAc[i-1][1]
         curr_chr=dataCNAc[i][0]
+        chr_CNA.append(addnum)
     dataCNAc[i][1]=int(addnum)+int(dataCNAc[i][1])
     i+=1
 
 i=0
 curr_chr=dataBafc[i][0]
 addnum=0
+chr_BAF=[]
 while i<len(dataBafc):
     if curr_chr!= dataBafc[i][0]:
         addnum=dataBafc[i-1][1]
         curr_chr=dataBafc[i][0]
+        chr_BAF.append(addnum)
     dataBafc[i][1]=int(addnum)+int(dataBafc[i][1])
     i+=1
 
 i=0
 curr_chr=dataSNVc[i][0]
 addnum=0
+chr_SNV=[]
 while i<len(dataSNVc):
     if curr_chr!= dataSNVc[i][0]:
         addnum=dataSNVc[i-1][1]
         curr_chr=dataSNVc[i][0]
+        chr_SNV.append(addnum)
     dataSNVc[i][1]=int(addnum)+int(dataSNVc[i][1])
     i+=1
 
@@ -125,10 +123,13 @@ while i<len(dataSNVc):
     
 plt.figure(figsize=(20, 8))
 
-#Drawing cna
+#Drawing CNA
 #ax=fig.add_axes([0.08,0.55,0.9,0.4])
 
 plt.subplot(311)
+
+plt.title(arg[1].split('/')[-1].replace('cna.','').replace('.txt','').replace('.bam',''))
+
 #x1=range(len(dataCNAc))
 x1=[]
 y1=[]
@@ -142,6 +143,9 @@ for i in dataCNAc:
     y1.append(y)
 plt.plot(x1,y1,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')
+for ch in chr_CNA:
+	plt.axvline(x=ch, color='0.75')
+plt.xticks(chr_CNA, range(1,len(chr_CNA)+1))
 plt.ylabel('DP')
 print('----DP has been completed----')
 
@@ -167,6 +171,9 @@ for i in dataBafc:
     #x_coin+=1
 plt.plot(x2,y2,'ko', markersize=1)
 #plt.plot(x1, y1, linewidth=6, color='black')
+for ch in chr_BAF:
+	plt.axvline(x=ch, color='0.75')
+plt.xticks(chr_BAF, range(1,len(chr_BAF)+1))
 plt.ylabel('Baf')
 print('----Baf has been completed----')
 
@@ -188,6 +195,9 @@ for i in dataSNVc:
     #x_coin+=1
 plt.plot(x3,y3,'ko', markersize=1)
 #plt.plot(x3, y3, linewidth=6, color='black')
+for ch in chr_SNV:
+	plt.axvline(x=ch, color='0.75')
+plt.xticks(chr_SNV, range(1,len(chr_SNV)+1))
 plt.ylabel('SNV')
 print('----SNV has been completed----')
 
@@ -196,3 +206,4 @@ plt.savefig('Fig', fmt='pdf')
 #plt.show()
 
 print('-----Completed------')
+
