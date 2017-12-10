@@ -35,15 +35,20 @@ def get_data(fname, chrs=None):
 
 def genome_from_dict (dictionary):
 	genome=np.zeros((1, len(dictionary[dictionary.keys()[0]][0])))
-	current_position=0
+	current_bais=0
 	chromosome_bounds=[]
 	for key in dictionary.keys():
 		current_data=dictionary[key]
 		for pos in current_data:
-			pos[0]+=current_position
-			pos[2]+=current_position
-		current_position+=dictionary[key][-1][2]
-		chromosome_bounds.append(current_position)
+			pos[0]+=current_bais
+			print(pos[2])
+			pos[2]+=current_bais
+			print('-----'+str(pos[2]))
+		current_bais=current_data[-1][2]
+		#print(dictionary[key][-1][2])
+		#print('----')
+		#print(current_data[-1][2])
+		chromosome_bounds.append(current_bais)
 		genome = np.vstack((genome, current_data))
 	return genome , chromosome_bounds
 
