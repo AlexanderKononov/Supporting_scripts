@@ -30,7 +30,7 @@ def get_data(fname, chrs=None):
             post = {chr : post[post[:,0]==chr,1:] for chr in chromosomes}
             return [data[0], data[1], post]
         else:
-            print 'unsupported file format'            
+            print('unsupported file format')            
             return None
 
 def genome_from_dict (dictionary):
@@ -41,13 +41,8 @@ def genome_from_dict (dictionary):
 		current_data=dictionary[key]
 		for pos in current_data:
 			pos[0]+=current_bais
-			print(pos[2])
 			pos[2]+=current_bais
-			print('-----'+str(pos[2]))
 		current_bais=current_data[-1][2]
-		#print(dictionary[key][-1][2])
-		#print('----')
-		#print(current_data[-1][2])
 		chromosome_bounds.append(current_bais)
 		genome = np.vstack((genome, current_data))
 	return genome , chromosome_bounds
@@ -123,7 +118,7 @@ cbar.ax.tick_params(labelsize=10)
 cbar.outline.set_visible(False)
 
 plt.savefig(arg[1]+'CNA.pdf')
-plt.show()
+#plt.show()
 
 ####################################################################################
 
@@ -178,4 +173,4 @@ cbar.ax.tick_params(labelsize=10)
 cbar.outline.set_visible(False)
 
 plt.savefig(arg[1]+'BAF.pdf')
-plt.show()
+#plt.show()
