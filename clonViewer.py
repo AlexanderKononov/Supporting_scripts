@@ -34,7 +34,11 @@ def get_data(fname, chrs=None):
             return None
 
 def genome_from_dict (dictionary):
-	genome=np.zeros((1, len(dictionary[dictionary.keys()[0]][0])))
+	first_chr=0
+	for i in dictionary.keys():
+	    first_chr=i
+	    break
+	genome=np.zeros((1, len(dictionary[int(first_chr)][0])))
 	current_bais=0
 	chromosome_bounds=[]
 	for key in dictionary.keys():
