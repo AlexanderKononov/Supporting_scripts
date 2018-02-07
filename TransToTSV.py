@@ -195,11 +195,11 @@ for i in SNV_data:
     data_line.append(2)
     step=relayRaceSerch(i[0],i[1],CNA_data,step[1])
     if step[0]==-1:
-        data_line.append(2)
-        data_line.append(0)        
+        data_line.append(0)
+        data_line.append(2)        
     else:
-        data_line.append(CNA_data[step[0]][3])
         data_line.append(CNA_data[step[0]][4])
+        data_line.append(CNA_data[step[0]][3])
     data.append(data_line) 
 
 
