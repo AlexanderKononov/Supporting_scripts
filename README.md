@@ -1,4 +1,4 @@
-# File preparator for PyClone
+# File preparator
 Here I store different templates
 and some parts of unfinished code.
 So, below I try to add some annotation to few useful scripts from this "project"
