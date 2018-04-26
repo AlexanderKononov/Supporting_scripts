@@ -22,3 +22,13 @@ This scripts can be used to preparing CloneHD input. It merges two file from 2 s
 *SNV_extract.py*
 
 This programme take file with SNVs data of every samples of patient (by this format the variant data are stored in HERCULES project) and split on separate files by samples.
+
+*fromPyCloneToSCHICM.py*
+
+The script present a bridge between PyClone output data format and SCHISM input data format. It take 2+ argument: first is file of clonality PyClone output table, sacond is loci PyClone output table. Tables can be obtained by standard "build_table" PyClone comands.
+By third and other additional arguments should be note PyClone input files (with .tsv extension) containing reads data. 
+The script provide three files:
+1. mut-to-cluster.tsv
+2. clusterEstimates.tsv
+3. mut-read.tsv
+Output files siute of a discription of SCHISM example inputs in tutorial (see https://github.com/KarchinLab/SCHISM/wiki/Tutorial).
