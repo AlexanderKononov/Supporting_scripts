@@ -31,4 +31,5 @@ The script provide three files:
 1. mut-to-cluster.tsv
 2. clusterEstimates.tsv
 3. mut-read.tsv
-Output files siute of a discription of SCHISM example inputs in tutorial (see https://github.com/KarchinLab/SCHISM/wiki/Tutorial).
+
+Output files are suit of a description of SCHISM example inputs in tutorial (see https://github.com/KarchinLab/SCHISM/wiki/Tutorial).
