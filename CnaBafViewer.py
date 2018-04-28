@@ -33,6 +33,8 @@ def get_data(fname, chrs=None):
             print 'unsupported file format'            
             return None
 
+
+
 ####################################################################################
 
 arg=sys.argv
