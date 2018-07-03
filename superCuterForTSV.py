@@ -29,6 +29,8 @@ for i in range(len(data[currentName])):
 	for j in data.keys():
 		if int(data[j][i][2]) == 0:
 			zeros += 1
+		if int(data[j][i][5]) == 0:
+			zeros = len(data)
 	if zeros < len(data)/rate:
 		positions.append(data[currentName][i][0])
 

@@ -1,6 +1,6 @@
 import sys
 
-def getClusterList(cluster_file_name, threshold = 1):
+def getClusterList(cluster_file_name, threshold = 2):
 	f_r = open(cluster_file_name, 'r')
 	cluster_list = []
 	line = f_r.readline()
@@ -32,6 +32,8 @@ def getData(file_name):
 		data.append(l)
 		line = f_r.readline().strip()
 	f_r.close()
+	for i in range(1, len(data)):
+		data[i][1] = data[i][1].replace('sample', 'smpl')
 	return data
 
 def getReadData(read_file_list):
@@ -71,7 +73,10 @@ def filtrationByList(data, suite_list, key_word = 'clust'):
 def writeMutToCluster(loci_data):
 	f_w = open('mut-to-cluster.tsv', 'w')
 	f_w.write('mutationID\tclusterID\n')
+	current_mutation = ''
 	for i in range(1,len(loci_data)):
+		if current_mutation == loci_data[i][0]: continue
+		current_mutation = loci_data[i][0]
 		f_w.write(loci_data[i][0] + '\t' + loci_data[i][2] +'\n')		
 	f_w.close()
 	
