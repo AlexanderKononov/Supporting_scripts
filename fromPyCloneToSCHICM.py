@@ -1,14 +1,15 @@
 import sys
+import argparse
 
-def getClusterList(cluster_file_name, threshold = 2):
+def getClusterList(cluster_file_name, threshold = 0):
 	f_r = open(cluster_file_name, 'r')
-	cluster_list = []
+	cluster_list = set()
 	line = f_r.readline()
 	line = f_r.readline()
 	while line != '':
 		l = line.split('\t')
 		if int(l[2].strip()) > threshold:
-			cluster_list.append(l[1].strip())
+			cluster_list.add(l[1].strip())
 		line = f_r.readline()
 	f_r.close()
 	return cluster_list
@@ -96,20 +97,29 @@ def writeMutRead(read_data):
 	f_w.close()
 
 
+#arg = sys.argv
+parser = argparse.ArgumentParser(description = "Transfer output data tables of PyClone to input files for SCHOSM. Take cluster loci files and original tsv files of samples.")
+parser.add_argument("cluster", help = "PyClone output file with cluster information")
+parser.add_argument("loci", help = "PyClone output file with loci information")
+parser.add_argument("sample_tsv_files", nargs = '*', help = "PyClone input files which used for PyClone analysis and harbor information about mutation. It is tsv files per sample")
+parser.add_argument("-t", "--threshold", default = 0, type = int, help = "Clustr with size less then this threshold are filtered out") 
 
-arg = sys.argv
 
-cluster_list = getClusterList(arg[1])
-loci_data = getData(arg[2])
+args = parser.parse_args()
+
+
+cluster_list = getClusterList(args.cluster, threshold = args.threshold)
+#print(cluster_list)
+loci_data = getData(args.loci)
 loci_data = filtrationByList(loci_data, cluster_list)
 writeMutToCluster(loci_data)
 writeClusterEstimates(loci_data)
 print('---Detect essential clusters: ' + str(len(cluster_list)))
 mutation_list = getMutationList(loci_data)
-arg.pop(0)
-arg.pop(0)
-arg.pop(0)
-read_data = getReadData(arg)
+#arg.pop(0)
+#arg.pop(0)
+#arg.pop(0)
+read_data = getReadData(args.sample_tsv_files)
 read_data = filtrationByList(read_data, mutation_list, key_word = 'mutat')
 writeMutRead(read_data)
 print('---Considered mutations: ' + str(len(mutation_list)))
