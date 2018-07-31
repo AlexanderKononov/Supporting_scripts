@@ -1,17 +1,24 @@
+import argparse
 import sys
 
 arg = sys.argv
-rate = 1
-if len(arg) == 4:
-	rate = float(arg[3])
-f_r = open(arg[1], 'r')
+parser = argparse.ArgumentParser(description="filtrating and sorting cna and snv from general tsv file")
+parser.add_argument('input_file', help="general file (tsv) with SNV and CNA data")
+parser.add_argument('-n', '--name_filter', default="", help="part of names of samples which should be included into analysis")
+parser.add_argument('-z', '--threshold_zero', type=float, default=1, help="what fraction of samples with zero copy number does position can have to still be included this position in output")
+parser.add_argument('-r', '--reducing', type=int, default=1, help="keep only each N position and remove every other one")
+
+
+args = parser.parse_args()
+
+f_r = open(args.input_file, 'r')
 currentName = ''
 data = {}
 heder = f_r.readline()
 line = f_r.readline()
 while line != '':
 	l = line.strip().split('\t')
-	if l[0].find(arg[2]) == -1:
+	if l[0].find(args.name_filter) == -1:
 		line = f_r.readline()
 		continue
 	name = l[0].strip().split(':')[0]
@@ -23,6 +30,8 @@ while line != '':
 	line = f_r.readline()
 f_r.close()
 
+print(str(len(data[currentName]))+' position was detected')
+
 positions = []
 for i in range(len(data[currentName])):
 	zeros = 0
@@ -31,8 +40,19 @@ for i in range(len(data[currentName])):
 			zeros += 1
 		if int(data[j][i][5]) == 0:
 			zeros = len(data)
-	if zeros < len(data)/rate:
+	if zeros <= len(data)*args.threshold_zero:
 		positions.append(data[currentName][i][0])
+
+print(str(len(positions))+' position was stayed after filtaration of zero copy number')
+
+reduced_positions=[]
+i = 0		
+while i < len(positions):
+	reduced_positions.append(positions[i])
+	i += args.reducing
+positions = reduced_positions
+
+print(str(len(positions))+' position was stayed after reducing')	
 
 for i in data.keys():
 	f_w = open(i + '_sml.tsv', 'w')
