@@ -33,3 +33,48 @@ The script provide three files:
 3. mut-read.tsv
 
 Output files are suit of a description of SCHISM example inputs in tutorial (see https://github.com/KarchinLab/SCHISM/wiki/Tutorial).
+
+*superCuterForTSV.py*
+
+Filtrating and sorting cna and snv from general tsv file. ´--help´ flag is available for additional details.
+
+---
+
+*toTSVbySet.py*
+The code extracts DB and AF information (cna and baf data) from one summary file included all samples of cancer case (this format available within HERCULES project). (The code contains some templates for the unification of processing and managing tab-separated file of HERCULES project)
+
+*bafFromBed.py*
+The template of the script that takes a tab separated file with DB and AF data and extracts BAF data file transfer the data table in numpy array.
+
+*BAFviewer.py*
+Part of CNABAFSNVviewer.py script. This script can draw just BAF profile of genetic data.
+
+*clonViewer.py*
+Copy of script from CloneHD supplementary code. The code takes output file of CloneHD analysis (File with cna.subclone extension) and visualizes these results as color BAF and CNA profiles for each predicted subclones.
+
+*cuterAdd.py*
+The script takes two tab-separated files and compares them. If they have similar values the script write this line (from the second file) in the new file (Z_true2.csv)
+
+*cuterForTSV.py*
+The script takes tab-separated file with sorted genome observation from different samples and creates separated files with data for each sample. It is possible to add a sample name as the second arguments to exclude this samples from processing.
+
+*DATAview.py*
+The copy from CloneHD supplementary code. The script takes file input of CloneHD analysis and draws DP, BAF and SNV genetic profile from the raw data.
+
+*extractADDP.py*
+A template of the script which tries to extract AD and DP information from the last column of a tab-separated file and saves this information in two new files.
+
+*extractBedSeg.py*
+A template of the script which takes a tab-separated file and looks over the data. It is possible to exclude any chromosome or decrease number of considered observation (resolution of data).
+
+*extrFiltAD.py*
+A template of the script which takes a tab-separated file and looks over the data. It allows filtering data by different properties and flags.
+
+*general_pipline.sh*
+Bash script with the command for GATK for haplotype calling. It takes bam data file and reference genome file.
+
+*getNormPosition.py*
+The script takes two files. The first is data file from the normal control sample. The second is data of the target (non-control) sample. The script extracts the intersection of these two lists of DNA coordinates. This code is used during preprocessing data during CloneHD analysis for normalization of data by normal tissue sample.
+
+
+
