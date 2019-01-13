@@ -76,5 +76,6 @@ Bash script with the command for GATK for haplotype calling. It takes bam data f
 *getNormPosition.py*
 The script takes two files. The first is data file from the normal control sample. The second is data of the target (non-control) sample. The script extracts the intersection of these two lists of DNA coordinates. This code is used during preprocessing data during CloneHD analysis for normalization of data by normal tissue sample.
 
-
+*Vmeasure.py*
+The script takes two files with Z matrices of subclone prediction (matrix of predicted subclone per predicted mutation cluster, with 0 and 1 elements) One matrix is predicted cluster-subclone assignment another one is know seted cluster -subclone information. The script writs V-measure metrics to evaluate of rightness of prediction.
 
