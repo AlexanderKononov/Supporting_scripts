@@ -1,7 +1,5 @@
-# File preparator
-Here I store different templates
-and some parts of unfinished code.
-So, below I try to add some annotation to few useful scripts from this "project"
+# Toolbox for NGS data processing
+Here I store different templates and scripts to process WGS data and scripts to format files as input to other WGS analyzing tools.
 
 *TransToTSV.py*
 
